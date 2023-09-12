@@ -1,0 +1,1134 @@
+app.background= fill='black'
+
+music1 = Sound('http://free-loops.com/data/mp3/7c/e8/26513e227fce7d33ab24d7e328b6.mp3')
+music2 = Sound('http://free-loops.com/data/mp3/86/e1/035e7412e61aeb2e796c6ed513ab.mp3')
+music3 = Sound('http://free-loops.com/data/mp3/69/15/babeffa14499322e0b6ad998f1f0.mp3')
+
+
+name1 = Label('peyton',200,130,bold=True,fill='white')
+name2 = Label('bob',200,170,bold=True,fill='white')
+name3 = Label('drew',200,210,bold=True,fill='white')
+name4 = Label('seth',200,250,bold=True,fill='white')
+name5 = Label('beet',200,290,bold=True,fill='white')
+name6 = Label('pop',200,330,bold=True,fill='white')
+
+name1.visible=False
+name2.visible=False
+name3.visible=False
+name4.visible=False
+name5.visible=False
+name6.visible=False
+
+name1scoreA=0
+name1scoreB=0
+
+finalscore= name1scoreA+name1scoreB
+name1score = Label(finalscore,200,150,bold=True,fill='white')
+
+name1score.visible=False
+
+name2scoreA=0
+name2scoreB=0
+
+finalscore= name2scoreA+name2scoreB
+name2score = Label(finalscore,200,190,bold=True,fill='white')
+
+name2score.visible=False
+
+name3scoreA=0
+name3scoreB=0
+
+finalscore= name3scoreA+name3scoreB
+name3score = Label(finalscore,200,230,bold=True,fill='white')
+
+name3score.visible=False
+
+name4scoreA=0
+name4scoreB=0
+
+finalscore= name4scoreA+name4scoreB
+name4score = Label(finalscore,200,270,bold=True,fill='white')
+
+name4score.visible=False
+
+name5scoreA=0
+name5scoreB=0
+
+finalscore= name5scoreA+name5scoreB
+name5score = Label(finalscore,200,310,bold=True,fill='white')
+
+name5score.visible=False
+
+name6scoreA=0
+name6scoreB=0
+
+finalscore= name6scoreA+name6scoreB
+name6score = Label(finalscore,200,350,bold=True,fill='white')
+
+name6score.visible=False
+
+
+leaderboard = Group(
+Rect(0,0,400,400),
+Label('Learderboard:',200,40,bold=True,fill='white'),
+Label('Scores:',200,100,fill='white',bold=True),
+Line(120,80,120,360,fill='white'),
+Line(280,80,280,360,fill='white'),
+Line(120,120,280,120,fill='white'),
+Line(120,160,280,160,fill='white'),
+Line(120,200,280,200,fill='white'),
+Line(120,240,280,240,fill='white'),
+Line(120,280,280,280,fill='white'),
+Line(120,320,280,320,fill='white'),
+Line(120,360,280,360,fill='white'),
+)
+leaderboard.visible=False
+
+
+app.time =10
+count_down = 0
+
+startlabel1 = Label('Welcome to the Maze Race Game!',200,160,bold=True, fill='white')
+startlabel2 = Label('Please press space to continue to the instructions menu',200,200,bold=True,fill='white')
+startlabel3 = Label('Have fun and enjoy playing!',200,240,bold=True,fill='white',size=11)
+
+instructions1 = Label('How To Play:',200,80,bold=True,fill='white',visible=False)
+instructions2 = Label('To move the player1 centerY press the Up and Down arrows',200,120,bold=True,fill='white',visible=False)
+instructions3 = Label('To move the player1 centerX press the Left and Right arrows',200,160,bold=True,fill='white',visible=False)
+instructions4 = Label('To move the player2 centerY press the w and s keys',200,200,bold=True,fill='white',visible=False)
+instructions5 = Label('To move the player2 centerX press the a and d keys',200,240,bold=True,fill='white',visible=False)
+instructions6 = Label('Press Enter to start the game',200,320,bold=True,fill='white',visible=False)
+instructions7 = Label('Input your name in the program and both scores from player1 and 2',200,280,bold=True,fill='white',visible=False,size=12)
+
+
+winscreen = Rect(0,0,400,400,visible=False)
+winScreen1 = Label('Congradulations! You have defeated the level and completed the game',200,150,size=11,bold=True,visible=False,fill='white')
+winScreen2 = Label('Thank you for playing',200,180,fill='white',bold=True,size=20,visible=False)
+
+loseScreen = Label('You Lost!',200,170,fill='white',bold=True,visible=False,size=20)
+loseScreen1 = Label('Please play again',200,200,fill='white',bold=True,visible=False,size=20)
+
+checkpoint = Label(0,200,230,fill='white',bold=True,visible=False,size=20)
+checkpoints2 = Label('You collected',110,230,bold=True,fill='white',size=20,visible=False)
+checkpoints3 = Label('checkpoint points',305,230,bold=True,fill='white',size=20,visible=False)
+
+
+
+
+maze = Group(
+Line(40,0,400,0,fill='white',lineWidth=20),
+Line(0,40,0,400,fill='white',lineWidth=20),
+Line(0,400,400,400,fill='white',lineWidth=20),
+Line(400,400,400,0,fill='white',lineWidth=20),
+Line(200,400,200,320,fill='white',lineWidth=10),
+Line(0,80,80,80,fill='white',lineWidth=10),
+Line(75,80,75,120,fill='white',lineWidth=10),
+Line(120,0,120,40,fill='white',lineWidth=10),
+Line(115,40,200,40,fill='white',lineWidth=10),
+Line(0,160,80,160,fill='white',lineWidth=10),
+Line(160,40,160,80,fill='white',lineWidth=10),
+Line(165,80,120,80,fill='white',lineWidth=10),
+Line(120,75,120,160,fill='white',lineWidth=10),
+Line(120,160,120,200,fill='white',lineWidth=10),
+Line(125,200,60,200,fill='white',lineWidth=10),
+Line(60,195,60,280,fill='white',lineWidth=10),
+Line(55,280,120,280,fill='white',lineWidth=10),
+Line(120,275,120,320,fill='white',lineWidth=10),
+Line(125,320,60,320,fill='white',lineWidth=10),
+Line(120,320,205,320,fill='white',lineWidth=10),
+Line(200,320,280,320,fill='white',lineWidth=10),
+Line(280,315,280,350,fill='white',lineWidth=10),
+Line(200,35,200,120,fill='white',lineWidth=10),
+Line(205,120,160,120,fill='white',lineWidth=10),
+Line(240,0,240,80,fill='white',lineWidth=10),
+Line(320,0,320,80,fill='white',lineWidth=10),
+Line(315,80,340,80,fill='white',lineWidth=10),
+Line(240,320,240,280,fill='white',lineWidth=10),
+Line(245,280,160,280,fill='white',lineWidth=10),
+Line(160,285,160,160,fill='white',lineWidth=10),
+Line(400,120,320,120,fill='white',lineWidth=10),
+Line(240,280,240,120,fill='white',lineWidth=10),
+Line(240,162,308,162,fill='white',lineWidth=10),
+Line(240,200,308,200,fill='white',lineWidth=10),
+Line(240,240,308,240,fill='white',lineWidth=10),
+Line(240,280,308,280,fill='white',lineWidth=10),
+)
+maze.visible=False
+
+player1 = Rect(0,0,17,17,fill='red',border='steelBlue')
+player2 = Star(280,60,13,5,fill='orange',border='purple',visible=False)
+
+player1.visible=False
+
+player1.score = Label(0,9,10,fill='white',bold=True)
+player2.score = Label(0,280,60,fill='white',bold=True,visible=False,size=10)
+
+player1.score.visible=False
+
+coin1 = Circle(40,120,10,fill='yellow',border='black')
+coin2 = Circle(80,300,10,fill='yellow',border='black')
+coin3 = Circle(220,20,10,fill='yellow',border='black')
+coin4 = Circle(180,60,10,fill='yellow',border='black')
+coin5 = Circle(180,300,10,fill='yellow',border='black')
+coin6 = Circle(360,40,10,fill='yellow',border='black')
+
+coin1.visible=False
+coin2.visible=False
+coin3.visible=False
+coin4.visible=False
+coin5.visible=False
+coin6.visible=False
+
+
+wincoin = Circle(240,360,14,fill='yellow',border='black')
+wincoinlabel = Label('win',240,360,bold=True,fill='black')
+
+wincoin.visible=False
+wincoinlabel.visible=False
+
+badguy1 = Rect(80,50,20,20,fill='red')
+badguy2 = Rect(25,280,20,20,fill='red')
+badguy3 = Rect(110,360,20,20,fill='red')
+badguy4 = Rect(190,200,20,20,fill='red')
+badguy5 = Rect(110,230,20,20,fill='red')
+badguy6 = Rect(280,170,20,20,fill='red')
+badguy7 = Rect(280,250,20,20,fill='red')
+badguy8 = Rect(310,320,20,20,fill='red')
+
+badguy1.visible=False
+badguy2.visible=False
+badguy3.visible=False
+badguy4.visible=False
+badguy5.visible=False
+badguy6.visible=False
+badguy7.visible=False
+badguy8.visible=False
+
+badguy1.dx = 2
+badguy2.dx = 2
+badguy3.dx = 2
+badguy4.dx = 2
+badguy5.dx = 2
+badguy6.dx = 2
+badguy7.dx = 2
+badguy8.dx = 2
+
+tube1 = Group(
+Rect(165,350,30,20,fill='lime',border='black'),
+Rect(160,345,10,30,fill='lime',border='black'),
+)
+
+tube1.visible=False
+
+tube2 = Group(
+Rect(265,10,30,40,fill='lime',border='black'),
+Rect(275,25,10,35,fill='lime',border='black',rotateAngle=90),
+)
+
+tube2.visible=False
+
+
+def onKeyHold(keys):
+        if ('up' in keys):
+            player1.centerY -= 4
+        if ('down' in keys):
+            player1.centerY += 4
+        if ('left' in  keys):
+            player1.centerX -= 4
+        if ('right' in keys):
+            player1.centerX += 4
+            
+        if ('w' in keys):
+            player2.centerY -= 3
+        if ('s' in keys):
+            player2.centerY += 3
+        if ('a' in  keys):
+            player2.centerX -= 3
+        if ('d' in keys):
+            player2.centerX += 3
+            
+        
+        player1.score.centerX = player1.centerX
+        player1.score.centerY = player1.centerY
+        player1.score.value += 1
+        
+        player2.score.centerX = player2.centerX
+        player2.score.centerY = player2.centerY
+        player2.score.value += 1
+        
+        
+def onStep():
+    badguy1.centerX += badguy1.dx
+    if ((badguy1.centerX <= 20) or (badguy1.centerX >= 145)):
+        badguy1.dx *= -1
+        
+    badguy2.centerY += badguy2.dx
+    if ((badguy2.centerY <= 180) or (badguy2.centerY >= 380)):
+        badguy2.dx *= -1
+        
+    badguy3.centerY += badguy3.dx
+    if ((badguy3.centerY <= 335) or (badguy3.centerY >= 380)):
+        badguy3.dx *= -1
+        
+    badguy4.centerY += badguy4.dx
+    if ((badguy4.centerY <= 135) or (badguy4.centerY >= 265)):
+        badguy4.dx *= -1
+        
+    badguy5.centerX += badguy5.dx
+    if ((badguy5.centerX <= 75) or (badguy5.centerX >= 145)):
+        badguy5.dx *= -1
+        
+    badguy6.centerX += badguy6.dx
+    if ((badguy6.centerX <= 255) or (badguy6.centerX >= 380)):
+        badguy6.dx *= -1
+        
+    badguy7.centerX += badguy7.dx
+    if ((badguy7.centerX <= 255) or (badguy7.centerX >= 380)):
+        badguy7.dx *= -1
+        
+    badguy8.centerX += badguy8.dx
+    if ((badguy8.centerX <= 295) or (badguy8.centerX >= 380)):
+        badguy8.dx *= -1
+        
+        
+    app.time-=count_down
+    if (app.time <= 0):
+        leaderboard.visible=True
+        leaderboard.toFront()
+        winscreen.visible=False
+        winScreen1.visible=False
+        winScreen2.visible=False
+        loseScreen.visible=False
+        loseScreen1.visible=False
+        checkpoint.visible=False 
+        checkpoints2.visible=False
+        checkpoints3.visible=False
+        name1.visible=True
+        name2.visible=True
+        name3.visible=True
+        name4.visible=True
+        name5.visible=True
+        name6.visible=True
+        name1score.visible=True
+        name2score.visible=True
+        name3score.visible=True
+        name4score.visible=True
+        name5score.visible=True
+        name6score.visible=True
+        name1.toFront()
+        name2.toFront()
+        name3.toFront()
+        name4.toFront()
+        name5.toFront()
+        name6.toFront()
+        name1score.toFront()
+        name2score.toFront()
+        name3score.toFront()
+        name4score.toFront()
+        name5score.toFront()
+        name6score.toFront()
+        
+def onKeyPress(key):
+    if(key=='space'):
+        startlabel1.visible=False
+        startlabel2.visible=False
+        startlabel3.visible=False
+        instructions1.visible=True
+        instructions2.visible=True
+        instructions3.visible=True
+        instructions4.visible=True
+        instructions5.visible=True
+        instructions6.visible=True
+        instructions7.visible=True
+        
+    if(key=='enter'):
+        instructions1.visible=False
+        instructions2.visible=False
+        instructions3.visible=False
+        instructions4.visible=False
+        instructions5.visible=False
+        instructions6.visible=False
+        instructions7.visible=False
+        maze.visible=True
+        badguy1.visible=True
+        badguy2.visible=True
+        badguy3.visible=True
+        badguy4.visible=True
+        badguy5.visible=True
+        badguy6.visible=True
+        badguy7.visible=True
+        badguy8.visible=True
+        coin1.visible=True
+        coin2.visible=True
+        coin3.visible=True
+        coin4.visible=True
+        coin5.visible=True
+        coin6.visible=True
+        wincoin.visible=True
+        wincoinlabel.visible=True
+        player1.visible=True
+        player1.score.visible=True
+        tube1.visible=True
+        tube2.visible=True
+        music1.play(loop=True)
+        
+        
+    if(player1.hitsShape(maze)==True):
+        winscreen.visible=True
+        loseScreen.visible=True
+        loseScreen1.visible=True
+        checkpoint.visible=True
+        checkpoints2.visible=True
+        checkpoints3.visible=True
+        badguy1.visible=False
+        badguy2.visible=False
+        badguy3.visible=False
+        badguy4.visible=False
+        badguy5.visible=False
+        badguy6.visible=False
+        badguy7.visible=False
+        badguy8.visible=False
+        maze.visible=False
+        coin1.visible=False
+        coin2.visible=False
+        coin3.visible=False
+        coin4.visible=False
+        coin5.visible=False
+        coin6.visible=False
+        player1.visible=False
+        tube1.visible=False
+        tube2.visible=False
+        player2.visible=False
+        wincoin.visible=False
+        player1.score.visible=False
+        player2.score.visible=False
+        music1.pause()
+        music2.play()
+        global count_down
+        count_down =.03
+        
+        
+            
+        
+    
+    if(player1.hitsShape(badguy1)==True):
+        winscreen.visible=True
+        loseScreen.visible=True
+        loseScreen1.visible=True
+        checkpoint.visible=True
+        checkpoints2.visible=True
+        checkpoints3.visible=True
+        badguy1.visible=False
+        badguy2.visible=False
+        badguy3.visible=False
+        badguy4.visible=False
+        badguy5.visible=False
+        badguy6.visible=False
+        badguy7.visible=False
+        badguy8.visible=False
+        maze.visible=False
+        coin1.visible=False
+        coin2.visible=False
+        coin3.visible=False
+        coin4.visible=False
+        coin5.visible=False
+        coin6.visible=False
+        player1.visible=False
+        tube1.visible=False
+        tube2.visible=False
+        player2.visible=False
+        wincoin.visible=False
+        player1.score.visible=False
+        player2.score.visible=False
+        music1.pause()
+        music2.play()
+        app.stop()
+        
+    
+        
+    if(player1.hitsShape(badguy2)==True):
+        winscreen.visible=True
+        loseScreen.visible=True
+        loseScreen1.visible=True
+        checkpoint.visible=True
+        checkpoints2.visible=True
+        checkpoints3.visible=True
+        badguy1.visible=False
+        badguy2.visible=False
+        badguy3.visible=False
+        badguy4.visible=False
+        badguy5.visible=False
+        badguy6.visible=False
+        badguy7.visible=False
+        badguy8.visible=False
+        maze.visible=False
+        coin1.visible=False
+        coin2.visible=False
+        coin3.visible=False
+        coin4.visible=False
+        coin5.visible=False
+        coin6.visible=False
+        player1.visible=False
+        tube1.visible=False
+        tube2.visible=False
+        player2.visible=False
+        wincoin.visible=False
+        player1.score.visible=False
+        player2.score.visible=False
+        music1.pause()
+        music2.play()
+        app.stop()
+        
+    
+        
+    if(player1.hitsShape(badguy3)==True):
+        winscreen.visible=True
+        loseScreen.visible=True
+        loseScreen1.visible=True
+        checkpoint.visible=True
+        checkpoints2.visible=True
+        checkpoints3.visible=True
+        badguy1.visible=False
+        badguy2.visible=False
+        badguy3.visible=False
+        badguy4.visible=False
+        badguy5.visible=False
+        badguy6.visible=False
+        badguy7.visible=False
+        badguy8.visible=False
+        maze.visible=False
+        coin1.visible=False
+        coin2.visible=False
+        coin3.visible=False
+        coin4.visible=False
+        coin5.visible=False
+        coin6.visible=False
+        player1.visible=False
+        tube1.visible=False
+        tube2.visible=False
+        player2.visible=False
+        wincoin.visible=False
+        player1.score.visible=False
+        player2.score.visible=False
+        music1.pause()
+        music2.play()
+        app.stop()
+        
+    if(player1.hitsShape(badguy4)==True):
+        winscreen.visible=True
+        loseScreen.visible=True
+        loseScreen1.visible=True
+        checkpoint.visible=True
+        checkpoints2.visible=True
+        checkpoints3.visible=True
+        badguy1.visible=False
+        badguy2.visible=False
+        badguy3.visible=False
+        badguy4.visible=False
+        badguy5.visible=False
+        badguy6.visible=False
+        badguy7.visible=False
+        badguy8.visible=False
+        maze.visible=False
+        coin1.visible=False
+        coin2.visible=False
+        coin3.visible=False
+        coin4.visible=False
+        coin5.visible=False
+        coin6.visible=False
+        player1.visible=False
+        tube1.visible=False
+        tube2.visible=False
+        player2.visible=False
+        wincoin.visible=False
+        player1.score.visible=False
+        player2.score.visible=False
+        music1.pause()
+        music2.play()
+        app.stop()
+        
+    if(player1.hitsShape(badguy5)==True):
+        winscreen.visible=True
+        loseScreen.visible=True
+        loseScreen1.visible=True
+        checkpoint.visible=True
+        checkpoints2.visible=True
+        checkpoints3.visible=True
+        badguy1.visible=False
+        badguy2.visible=False
+        badguy3.visible=False
+        badguy4.visible=False
+        badguy5.visible=False
+        badguy6.visible=False
+        badguy7.visible=False
+        badguy8.visible=False
+        maze.visible=False
+        coin1.visible=False
+        coin2.visible=False
+        coin3.visible=False
+        coin4.visible=False
+        coin5.visible=False
+        coin6.visible=False
+        player1.visible=False
+        tube1.visible=False
+        tube2.visible=False
+        player2.visible=False
+        wincoin.visible=False
+        player1.score.visible=False
+        player2.score.visible=False
+        music1.pause()
+        music2.play()
+        app.stop()
+        
+    if(player1.hitsShape(badguy6)==True):
+        winscreen.visible=True
+        loseScreen.visible=True
+        loseScreen1.visible=True
+        checkpoint.visible=True
+        checkpoints2.visible=True
+        checkpoints3.visible=True
+        badguy1.visible=False
+        badguy2.visible=False
+        badguy3.visible=False
+        badguy4.visible=False
+        badguy5.visible=False
+        badguy6.visible=False
+        badguy7.visible=False
+        badguy8.visible=False
+        maze.visible=False
+        coin1.visible=False
+        coin2.visible=False
+        coin3.visible=False
+        coin4.visible=False
+        coin5.visible=False
+        coin6.visible=False
+        player1.visible=False
+        tube1.visible=False
+        tube2.visible=False
+        player2.visible=False
+        wincoin.visible=False
+        player1.score.visible=False
+        player2.score.visible=False
+        music1.pause()
+        music2.play()
+        app.stop()
+        
+    if(player1.hitsShape(badguy7)==True):
+        winscreen.visible=True
+        loseScreen.visible=True
+        loseScreen1.visible=True
+        checkpoint.visible=True
+        checkpoints2.visible=True
+        checkpoints3.visible=True
+        badguy1.visible=False
+        badguy2.visible=False
+        badguy3.visible=False
+        badguy4.visible=False
+        badguy5.visible=False
+        badguy6.visible=False
+        badguy7.visible=False
+        badguy8.visible=False
+        maze.visible=False
+        coin1.visible=False
+        coin2.visible=False
+        coin3.visible=False
+        coin4.visible=False
+        coin5.visible=False
+        coin6.visible=False
+        player1.visible=False
+        tube1.visible=False
+        tube2.visible=False
+        player2.visible=False
+        wincoin.visible=False
+        player1.score.visible=False
+        player2.score.visible=False
+        music1.pause()
+        music2.play()
+        app.stop()
+        
+    if(player1.hitsShape(badguy8)==True):
+        winscreen.visible=True
+        loseScreen.visible=True
+        loseScreen1.visible=True
+        checkpoint.visible=True
+        checkpoints2.visible=True
+        checkpoints3.visible=True
+        badguy1.visible=False
+        badguy2.visible=False
+        badguy3.visible=False
+        badguy4.visible=False
+        badguy5.visible=False
+        badguy6.visible=False
+        badguy7.visible=False
+        badguy8.visible=False
+        maze.visible=False
+        coin1.visible=False
+        coin2.visible=False
+        coin3.visible=False
+        coin4.visible=False
+        coin5.visible=False
+        coin6.visible=False
+        player1.visible=False
+        tube1.visible=False
+        tube2.visible=False
+        player2.visible=False
+        wincoin.visible=False
+        player1.score.visible=False
+        player2.score.visible=False
+        music1.pause()
+        music2.play()
+        app.stop()
+        
+        
+        
+    
+        
+    if(player1.hitsShape(coin1)==True):
+        checkpoint.value+=1
+        coin1.visible=False
+        maze.fill='purple'
+    
+        
+    if(player1.hitsShape(coin2)==True):
+        checkpoint.value+=1
+        coin2.visible=False
+        maze.fill='salmon'    
+    
+        
+    if(player1.hitsShape(coin3)==True):
+        checkpoint.value+=1
+        coin3.visible=False
+        maze.fill='khaki'
+        
+    if(player1.hitsShape(coin4)==True):
+        checkpoint.value+=1
+        coin4.visible=False
+        maze.fill='magenta'
+        
+    if(player1.hitsShape(coin5)==True):
+        checkpoint.value+=1
+        coin5.visible=False
+        maze.fill='brown'
+        
+    if(player1.hitsShape(coin6)==True):
+        checkpoint.value+=1
+        coin6.visible=False
+        maze.fill='steelBlue'
+        
+    if(player1.hitsShape(wincoin)==True):
+        checkpoint.value+=1
+        wincoin.visible=False
+        winscreen.visible=True
+        winScreen1.visible=True
+        winScreen2.visible=True
+        checkpoint.visible=True
+        checkpoints2.visible=True
+        checkpoints3.visible=True
+        badguy1.visible=False
+        badguy2.visible=False
+        badguy3.visible=False
+        badguy4.visible=False
+        badguy5.visible=False
+        badguy6.visible=False
+        badguy7.visible=False
+        badguy8.visible=False
+        maze.visible=False
+        coin1.visible=False
+        coin2.visible=False
+        coin3.visible=False
+        coin4.visible=False
+        coin5.visible=False
+        coin6.visible=False
+        player1.visible=False
+        tube1.visible=False
+        tube2.visible=False
+        player2.visible=False
+        wincoin.visible=False
+        player1.score.visible=False
+        player2.score.visible=False
+        music1.pause()
+        music3.play()
+        app.stop()
+        
+        
+        
+        
+    if(player2.hitsShape(maze)==True):
+        winscreen.visible=True
+        loseScreen.visible=True
+        loseScreen1.visible=True
+        checkpoint.visible=True
+        checkpoints2.visible=True
+        checkpoints3.visible=True
+        badguy1.visible=False
+        badguy2.visible=False
+        badguy3.visible=False
+        badguy4.visible=False
+        badguy5.visible=False
+        badguy6.visible=False
+        badguy7.visible=False
+        badguy8.visible=False
+        maze.visible=False
+        coin1.visible=False
+        coin2.visible=False
+        coin3.visible=False
+        coin4.visible=False
+        coin5.visible=False
+        coin6.visible=False
+        player1.visible=False
+        tube1.visible=False
+        tube2.visible=False
+        player2.visible=False
+        wincoin.visible=False
+        player1.score.visible=False
+        player2.score.visible=False
+        music1.pause()
+        music2.play()
+        app.stop()
+        
+    
+        
+    if(player2.hitsShape(badguy1)==True):
+        winscreen.visible=True
+        loseScreen.visible=True
+        loseScreen1.visible=True
+        checkpoint.visible=True
+        checkpoints2.visible=True
+        checkpoints3.visible=True
+        badguy1.visible=False
+        badguy2.visible=False
+        badguy3.visible=False
+        badguy4.visible=False
+        badguy5.visible=False
+        badguy6.visible=False
+        badguy7.visible=False
+        badguy8.visible=False
+        maze.visible=False
+        coin1.visible=False
+        coin2.visible=False
+        coin3.visible=False
+        coin4.visible=False
+        coin5.visible=False
+        coin6.visible=False
+        player1.visible=False
+        tube1.visible=False
+        tube2.visible=False
+        player2.visible=False
+        wincoin.visible=False
+        player1.score.visible=False
+        player2.score.visible=False
+        music1.pause()
+        music2.play()
+        app.stop()
+        
+    
+        
+    if(player2.hitsShape(badguy2)==True):
+        winscreen.visible=True
+        loseScreen.visible=True
+        loseScreen1.visible=True
+        checkpoint.visible=True
+        checkpoints2.visible=True
+        checkpoints3.visible=True
+        badguy1.visible=False
+        badguy2.visible=False
+        badguy3.visible=False
+        badguy4.visible=False
+        badguy5.visible=False
+        badguy6.visible=False
+        badguy7.visible=False
+        badguy8.visible=False
+        maze.visible=False
+        coin1.visible=False
+        coin2.visible=False
+        coin3.visible=False
+        coin4.visible=False
+        coin5.visible=False
+        coin6.visible=False
+        player1.visible=False
+        tube1.visible=False
+        tube2.visible=False
+        player2.visible=False
+        wincoin.visible=False
+        player1.score.visible=False
+        player2.score.visible=False
+        music1.pause()
+        music2.play()
+        app.stop()
+        
+    
+        
+    if(player2.hitsShape(badguy3)==True):
+        winscreen.visible=True
+        loseScreen.visible=True
+        loseScreen1.visible=True
+        checkpoint.visible=True
+        checkpoints2.visible=True
+        checkpoints3.visible=True
+        badguy1.visible=False
+        badguy2.visible=False
+        badguy3.visible=False
+        badguy4.visible=False
+        badguy5.visible=False
+        badguy6.visible=False
+        badguy7.visible=False
+        badguy8.visible=False
+        maze.visible=False
+        coin1.visible=False
+        coin2.visible=False
+        coin3.visible=False
+        coin4.visible=False
+        coin5.visible=False
+        coin6.visible=False
+        player1.visible=False
+        tube1.visible=False
+        tube2.visible=False
+        player2.visible=False
+        wincoin.visible=False
+        player1.score.visible=False
+        player2.score.visible=False
+        music1.pause()
+        music2.play()
+        app.stop()
+        
+    if(player2.hitsShape(badguy4)==True):
+        winscreen.visible=True
+        loseScreen.visible=True
+        loseScreen1.visible=True
+        checkpoint.visible=True
+        checkpoints2.visible=True
+        checkpoints3.visible=True
+        badguy1.visible=False
+        badguy2.visible=False
+        badguy3.visible=False
+        badguy4.visible=False
+        badguy5.visible=False
+        badguy6.visible=False
+        badguy7.visible=False
+        badguy8.visible=False
+        maze.visible=False
+        coin1.visible=False
+        coin2.visible=False
+        coin3.visible=False
+        coin4.visible=False
+        coin5.visible=False
+        coin6.visible=False
+        player1.visible=False
+        tube1.visible=False
+        tube2.visible=False
+        player2.visible=False
+        wincoin.visible=False
+        player1.score.visible=False
+        player2.score.visible=False
+        music1.pause()
+        music2.play()
+        app.stop()
+        
+    if(player2.hitsShape(badguy5)==True):
+        winscreen.visible=True
+        loseScreen.visible=True
+        loseScreen1.visible=True
+        checkpoint.visible=True
+        checkpoints2.visible=True
+        checkpoints3.visible=True
+        badguy1.visible=False
+        badguy2.visible=False
+        badguy3.visible=False
+        badguy4.visible=False
+        badguy5.visible=False
+        badguy6.visible=False
+        badguy7.visible=False
+        badguy8.visible=False
+        maze.visible=False
+        coin1.visible=False
+        coin2.visible=False
+        coin3.visible=False
+        coin4.visible=False
+        coin5.visible=False
+        coin6.visible=False
+        player1.visible=False
+        tube1.visible=False
+        tube2.visible=False
+        player2.visible=False
+        wincoin.visible=False
+        player1.score.visible=False
+        player2.score.visible=False
+        music1.pause()
+        music2.play()
+        app.stop()
+        
+    if(player2.hitsShape(badguy6)==True):
+        winscreen.visible=True
+        loseScreen.visible=True
+        loseScreen1.visible=True
+        checkpoint.visible=True
+        checkpoints2.visible=True
+        checkpoints3.visible=True
+        badguy1.visible=False
+        badguy2.visible=False
+        badguy3.visible=False
+        badguy4.visible=False
+        badguy5.visible=False
+        badguy6.visible=False
+        badguy7.visible=False
+        badguy8.visible=False
+        maze.visible=False
+        coin1.visible=False
+        coin2.visible=False
+        coin3.visible=False
+        coin4.visible=False
+        coin5.visible=False
+        coin6.visible=False
+        player1.visible=False
+        tube1.visible=False
+        tube2.visible=False
+        player2.visible=False
+        wincoin.visible=False
+        player1.score.visible=False
+        player2.score.visible=False
+        music1.pause()
+        music2.play()
+        app.stop()
+        
+    if(player2.hitsShape(badguy7)==True):
+        winscreen.visible=True
+        loseScreen.visible=True
+        loseScreen1.visible=True
+        checkpoint.visible=True
+        checkpoints2.visible=True
+        checkpoints3.visible=True
+        badguy1.visible=False
+        badguy2.visible=False
+        badguy3.visible=False
+        badguy4.visible=False
+        badguy5.visible=False
+        badguy6.visible=False
+        badguy7.visible=False
+        badguy8.visible=False
+        maze.visible=False
+        coin1.visible=False
+        coin2.visible=False
+        coin3.visible=False
+        coin4.visible=False
+        coin5.visible=False
+        coin6.visible=False
+        player1.visible=False
+        tube1.visible=False
+        tube2.visible=False
+        player2.visible=False
+        wincoin.visible=False
+        player1.score.visible=False
+        player2.score.visible=False
+        music1.pause()
+        music2.play()
+        app.stop()
+        
+    if(player2.hitsShape(badguy8)==True):
+        winscreen.visible=True
+        loseScreen.visible=True
+        loseScreen1.visible=True
+        checkpoint.visible=True
+        checkpoints2.visible=True
+        checkpoints3.visible=True
+        badguy1.visible=False
+        badguy2.visible=False
+        badguy3.visible=False
+        badguy4.visible=False
+        badguy5.visible=False
+        badguy6.visible=False
+        badguy7.visible=False
+        badguy8.visible=False
+        maze.visible=False
+        coin1.visible=False
+        coin2.visible=False
+        coin3.visible=False
+        coin4.visible=False
+        coin5.visible=False
+        coin6.visible=False
+        player1.visible=False
+        tube1.visible=False
+        tube2.visible=False
+        player2.visible=False
+        wincoin.visible=False
+        player1.score.visible=False
+        player2.score.visible=False
+        music1.pause()
+        music2.play()
+        app.stop()
+        
+        
+        
+    
+        
+    if(player2.hitsShape(coin1)==True):
+        checkpoint.value+=1
+        coin1.visible=False
+        maze.fill='orange'
+    
+        
+    if(player2.hitsShape(coin2)==True):
+        checkpoint.value+=1
+        coin2.visible=False
+        maze.fill='lightSkyBlue'    
+    
+        
+    if(player2.hitsShape(coin3)==True):
+        checkpoint.value+=1
+        coin3.visible=False
+        maze.fill='pink'
+        
+    if(player2.hitsShape(coin4)==True):
+        checkpoint.value+=1
+        coin4.visible=False
+        maze.fill='blue'
+        
+    if(player2.hitsShape(coin5)==True):
+        checkpoint.value+=1
+        coin5.visible=False
+        maze.fill='sienna'
+        
+    if(player2.hitsShape(coin6)==True):
+        checkpoint.value+=1
+        coin6.visible=False
+        maze.fill='green'
+        
+    if(player2.hitsShape(wincoin)==True):
+        checkpoint.value+=1
+        wincoin.visible=False
+        winscreen.visible=True
+        winScreen1.visible=True
+        winScreen2.visible=True
+        checkpoint.visible=True
+        checkpoints2.visible=True
+        checkpoints3.visible=True
+        badguy1.visible=False
+        badguy2.visible=False
+        badguy3.visible=False
+        badguy4.visible=False
+        badguy5.visible=False
+        badguy6.visible=False
+        badguy7.visible=False
+        badguy8.visible=False
+        maze.visible=False
+        coin1.visible=False
+        coin2.visible=False
+        coin3.visible=False
+        coin4.visible=False
+        coin5.visible=False
+        coin6.visible=False
+        player1.visible=False
+        tube1.visible=False
+        tube2.visible=False
+        player2.visible=False
+        wincoin.visible=False
+        player1.score.visible=False
+        player2.score.visible=False
+        music1.pause()
+        music3.play()
+        app.stop()
+        
+    if(player1.hitsShape(tube1)==True):
+        player1.visible=False
+        player1.score.visible=False
+        player2.visible=True
+        player2.score.visible=True
